@@ -53,7 +53,7 @@ Update the status column as gates close. Prompt definitions and dependencies:
 | --- | --- | --- | --- | --- |
 | G00 | 00 repository audit — **run once globally**, A owns, B/C countersign | A | `G00-orientation.md` | PASS (B/C countersign pending) |
 | G01 | 01 scaffold and pin | B | `G01-baseline.md` | PASS (Core) |
-| G02 | 02 threat model + interface freeze | A | `G02-contract-spec.md` | not started |
+| G02 | 02 threat model + interface freeze | A | `G02-contract-spec.md` | PASS (Core) |
 | G03 | 03 implement contracts | A | `G03-contracts.md` | not started |
 | G04 | 04 contract tests | A | `G04-contract-tests.md` | not started |
 | G05 | 05 red-team review | A | `G05-security-review.md` | not started |

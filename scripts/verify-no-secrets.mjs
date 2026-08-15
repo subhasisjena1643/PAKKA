@@ -10,6 +10,13 @@
  *     Markdown is exempt from the bare-hash scan because confirmed transaction/block hashes share that shape
  *     and legitimately appear in gate evidence (docs/LIVE_LINKS.md). Markdown is still scanned for explicit
  *     key/secret assignments.
+ *
+ * Exemptions (kept narrow so real keys still fail):
+ *  - Vendored third-party code under packages/contracts/lib/ (forge-std, OpenZeppelin) is not our secret to
+ *    manage and legitimately ships key-shaped test fixtures.
+ *  - A 32-byte hex constant explicitly annotated `// public-hash` (or `no-secret`) on the same line — a human
+ *    vouching for a public value such as a keccak256 test vector, block hash, or tx hash. An unannotated bare
+ *    key-shaped value still fails.
  */
 import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
@@ -21,6 +28,8 @@ const NUL = String.fromCharCode(0);
 const SKIP_EXT = new Set([".woff", ".woff2", ".ico", ".png", ".jpg", ".jpeg", ".gif", ".gz", ".webp"]);
 const SECRET_ASSIGN =
   /(PRIVATE_KEY|SECRET|MNEMONIC|SEED_PHRASE|PASSWORD)\s*[:=]\s*['"]?0x?[0-9a-fA-F]{16,}/i;
+const PUBLIC_HASH_ANNOTATION = /\/\/\s*(public-hash|no-secret|not-a-secret)/i;
+const VENDORED = "packages/contracts/lib/";
 
 const findings = [];
 
@@ -43,6 +52,7 @@ for (const file of tracked) {
 
   if (base === "package-lock.json" || base === "yarn.lock" || base === "pnpm-lock.yaml") continue;
   if (SKIP_EXT.has(extname(file).toLowerCase())) continue;
+  if (file.startsWith(VENDORED)) continue; // vendored third-party (forge-std, OZ)
 
   let text;
   try {
@@ -73,7 +83,7 @@ for (const file of tracked) {
     }
 
     // Rule 3 — bare key-shaped value in non-markdown source/config.
-    if (!isMarkdown && base !== ".env.example") {
+    if (!isMarkdown && base !== ".env.example" && !PUBLIC_HASH_ANNOTATION.test(line)) {
       const matches = line.match(KEY_SHAPE);
       if (matches) {
         for (const m of matches) {

@@ -8,3 +8,7 @@
  * Populated from Prompt 07 onward. Kept as an explicit module so typecheck has a target.
  */
 export const PACKAGE_NAME = "@pakka/chain" as const;
+
+// Frozen at Gate G02 — cross-lane artifacts other prompts build against:
+export * from "./lifecycle"; // UI plan-lifecycle type (Prompt 07 returns, Prompt 09 renders)
+export * from "./metadata"; // canonical metadata serializer (Prompts 06, 11)

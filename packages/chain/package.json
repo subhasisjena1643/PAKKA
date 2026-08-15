@@ -12,6 +12,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "canonicalize": "2.0.0",
     "viem": "^2.40.0"
   },
   "devDependencies": {
