@@ -1,0 +1,38 @@
+{
+  "name": "pakka-blitz",
+  "version": "0.1.0",
+  "private": true,
+  "description": "PAKKA — group checkout on Monad. Monorepo root (npm workspaces, one root lockfile).",
+  "license": "SEE LICENSE IN LICENSE",
+  "engines": {
+    "node": ">=22.14.0 <23"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/config",
+    "packages/chain",
+    "packages/ui"
+  ],
+  "scripts": {
+    "lint": "npm run lint --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "contracts:fmt-check": "forge fmt --check --root packages/contracts",
+    "contracts:fmt": "forge fmt --root packages/contracts",
+    "contracts:build": "forge build --root packages/contracts --sizes",
+    "contracts:test": "forge test --root packages/contracts -vvv",
+    "contracts:coverage": "forge coverage --root packages/contracts",
+    "abi:generate": "node scripts/generate-abi.mjs",
+    "config:emit": "node scripts/config-emit.mjs",
+    "build": "npm run build -w @pakka/web",
+    "test:e2e": "playwright test",
+    "verify:no-secrets": "node scripts/verify-no-secrets.mjs",
+    "gate": "npm ci && npm run lint && npm run typecheck && npm run test && npm run contracts:fmt-check && npm run contracts:build && npm run contracts:test && npm run contracts:coverage && npm run build && npm run test:e2e && npm run verify:no-secrets"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.47.2",
+    "typescript": "5.6.3",
+    "vitest": "2.1.9"
+  }
+}
