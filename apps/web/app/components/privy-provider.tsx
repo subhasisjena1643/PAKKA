@@ -9,9 +9,15 @@ export default function PrivyProvider({
 }: {
   children: React.ReactNode;
 }) {
+  // Privy requires an app ID of exactly 25 chars and throws otherwise (crashing prerender). When it is unset or
+  // malformed (bare clone / no env), render without auth so the app still builds; real deploys supply a valid ID.
+  const appId = process.env.NEXT_PUBLIC_PRIVY_APP_ID;
+  if (!appId || appId.length !== 25) {
+    return <>{children}</>;
+  }
   return (
     <BasePrivyProvider
-      appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID!}
+      appId={appId}
       clientId={process.env.NEXT_PUBLIC_PRIVY_CLIENT_ID!}
       config={{
         // Create embedded wallets for users who don't have a wallet
