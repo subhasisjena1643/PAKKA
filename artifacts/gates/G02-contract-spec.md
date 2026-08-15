@@ -79,4 +79,4 @@ Metadata vector verified identically on both sides: byte length 294, em dash pre
 Frozen interface + event payloads + stable test IDs → Prompts 03, 04, 05, 07 · UI lifecycle type → Prompt 09 ·
 canonical serializer → Prompts 06, 11.
 
-**Commit SHA:** not committed (awaiting user). Prompt 03 NOT started.
+**Commit SHA:** `0249c74` (branch `chain/spec`). Prompt 03 NOT started.

@@ -62,4 +62,4 @@ pinned commit `01ba917f9dd31a8067b7dd562c7a74fd928d5537`, vendored 2026-08-15 in
 
 No PAKKA screens, contracts, or product logic implemented (per Prompt 01 spec). Prompt 02 NOT started.
 
-**Commit SHA:** not committed (awaiting user).
+**Commit SHA:** `4828620` (branch `web/scaffold`).
