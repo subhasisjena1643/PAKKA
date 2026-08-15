@@ -43,6 +43,7 @@ for (const file of tracked) {
 
   if (base === "package-lock.json" || base === "yarn.lock" || base === "pnpm-lock.yaml") continue;
   if (SKIP_EXT.has(extname(file).toLowerCase())) continue;
+  if (file.startsWith("packages/contracts/lib/")) continue; // vendored third-party (forge-std); not our secrets
 
   let text;
   try {
