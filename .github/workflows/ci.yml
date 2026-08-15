@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# No deployment secrets are referenced here — pull requests must build without them.
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  web:
+    name: Lint · typecheck · unit · build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run test
+      - name: Build web
+        run: npm run build
+        env:
+          # Placeholder client config so the production build renders; real values come from the
+          # deployment manifest via config:emit (plan §6.2.1). Not secrets.
+          NEXT_PUBLIC_CHAIN_MODE: testnet
+          NEXT_PUBLIC_MONAD_CHAIN_ID: "10143"
+          NEXT_PUBLIC_PRIVY_APP_ID: ciplaceholderappid0000000
+          NEXT_PUBLIC_PIMLICO_BUNDLER_URL: https://api.pimlico.io/v2/10143/rpc?apikey=ci
+          NEXT_PUBLIC_SITE_URL: http://localhost:3000
+      - run: npm run verify:no-secrets
+
+  contracts:
+    name: Foundry build · test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: foundry-rs/foundry-toolchain@v1
+      - name: forge fmt --check
+        run: forge fmt --check --root packages/contracts
+      - name: forge build
+        run: forge build --root packages/contracts --sizes
+      - name: forge test
+        run: forge test --root packages/contracts -vvv
