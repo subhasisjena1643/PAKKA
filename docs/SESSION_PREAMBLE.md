@@ -85,10 +85,9 @@ Now:
 
 | | Session preamble | Prompt 00 |
 | --- | --- | --- |
-| When | every session | once, per lane, at the start of the build |
+| When | every session | once, globally, at the start of the build |
 | Produces | nothing | `artifacts/gates/G00-orientation.md` |
 | Reads | nothing | the full document set and the repository tree |
 | Length | ~1 screen | a full audit |
 
-Re-run Prompt 00 only if the repository state changes materially — a new lane joins, the toolchain changes, or
-a gate is invalidated.
+Re-run Prompt 00 only if the toolchain changes materially or a gate is invalidated. A new lane reads the existing G00 artifact.

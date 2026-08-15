@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Current repository state
 
-**Specification only — no code has been written yet**, and this is not a git repository. `docs/` holds the full
+**Specification and Execution document are committed. Application and contract implementationbegins at Prompt 1**. `docs/` holds the full
 design; `apps/`, `packages/`, and `scripts/` do not exist until Prompt 01 creates them.
 
 | Document | Role |
@@ -174,7 +174,7 @@ Coverage target: **100% branch coverage on join, leave, readiness, settlement, e
 
 Work is organized as 19 sequential prompts with binary exit gates. Do not skip ahead, and do not start the next prompt in the same pass.
 
-- Paste **`docs/SESSION_PREAMBLE.md`** at the start of every session. **Prompt 00 runs once per lane**, not every
+- Paste **`docs/SESSION_PREAMBLE.md`** at the start of every session. **Prompt 00 runs once globally, owned by A and countersigned by B and C**, not every
   session — it is a repository audit that produces `G00-orientation.md`.
 - **A gate passes at Core** (plan §8.6). Stretch items are recorded as `NOT RUN — stretch`; named cut variants
   (digital box, direct polling, two viewports, mainnet `SKIPPED SAFELY`) also pass. Say which variant you used.
