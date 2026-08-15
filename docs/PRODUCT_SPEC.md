@@ -13,8 +13,8 @@
 **Original title:** PAKKA — Monad Blitz Implementation & Technical Plan
 **Prepared:** 10 August 2026
 
-**Event fit:** six-hour build sprint, team of three, consumer dApp on Monad  
-**Product sentence:** A group checkout that settles only when enough people have committed. Nobody fronts the full amount, nobody chases payments, and an incomplete group gets its money back.  
+**Event fit:** six-hour build sprint, team of three, consumer dApp on Monad
+**Product sentence:** A group checkout that settles only when enough people have committed. Nobody fronts the full amount, nobody chases payments, and an incomplete group gets its money back.
 **Demo sentence:** `PAKKA?` → people join → `GROUP READY` → the merchant confirms availability → `PAKKA!`
 
 This version is deliberately optimized for a peer-voted, one-day room. It proves the on-chain conditional-payment primitive, creates a crowd moment, and produces verifiable live activity. It does **not** attempt Indian UPI, merchant KYC, fiat settlement, generic bill splitting, disputes, delivery confirmation, or AI.

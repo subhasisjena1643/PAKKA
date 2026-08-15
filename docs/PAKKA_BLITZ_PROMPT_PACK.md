@@ -23,7 +23,7 @@
    - **Member C** — event reducer, live wall, demo hardware, pitch evidence.
 3. Paste [`SESSION_PREAMBLE.md`](./SESSION_PREAMBLE.md) into **every** session — it is one screen of invariants,
    authority, evidence rules, and stop conditions. Run
-   [**Prompt 00**](#prompt-00--one-time-repository-audit) **once per lane** at the start of the build; it is a
+   [**Prompt 00**](#prompt-00--one-time-repository-audit) **once globally** at the start of the build; it is a
    repository audit, not a per-session ritual. Then run only the prompts assigned to that lane in
    [§4](#4-prompt-index-and-dependency-graph).
 4. Use small branches and merge at the stated integration gates. Do not let three agents edit the same files

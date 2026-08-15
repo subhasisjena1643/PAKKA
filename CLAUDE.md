@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Current repository state
 
-**Specification and Execution document are committed. Application and contract implementationbegins at Prompt 1**. `docs/` holds the full
+**Specification and execution documents are committed. Application and contract implementation begins at Prompt 01.** `docs/` holds the full
 design; `apps/`, `packages/`, and `scripts/` do not exist until Prompt 01 creates them.
 
 | Document | Role |
